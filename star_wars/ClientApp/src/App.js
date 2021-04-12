@@ -9,9 +9,12 @@ export default class App extends Component {
     movies: [],
     selectedMovieId: 0,
     isWookiee: false,
+    isLoading: false,
   };
 
   componentDidMount = () => {
+    this.setState({isLoading: true})
+
     fetch("StarWars/Movies")
       .then((response) => {
         if (!response.ok) {
@@ -26,7 +29,7 @@ export default class App extends Component {
             dateParts[1] + "/" + dateParts[2] + "/" + dateParts[0];
           return movie;
         });
-        this.setState({ movies });
+        this.setState({ movies, isLoading: false });
       });
   };
 
@@ -37,6 +40,9 @@ export default class App extends Component {
   onClickTranslate = () => {
     let url = "StarWars";
     url += this.state.isWookiee ? "/Movies" : "/Wookiee";
+
+    this.setState({isLoading: true});
+
     fetch(url)
       .then((response) => {
         if (!response.ok) {
@@ -52,7 +58,7 @@ export default class App extends Component {
               dateParts[1] + "/" + dateParts[2] + "/" + dateParts[0];
             return movie;
           });
-          this.setState({ movies, isWookiee: false });
+          this.setState({ movies, isWookiee: false, isLoading: false });
         } else {
           let wookieeMovies = movies.map((movie) => {
             const dateParts = movie.releaseDate.split("-");
@@ -60,7 +66,7 @@ export default class App extends Component {
               dateParts[1] + "/" + dateParts[2] + "/" + dateParts[0];
             return movie;
           });
-          this.setState({ movies: wookieeMovies, isWookiee: true });
+          this.setState({ movies: wookieeMovies, isWookiee: true, isLoading: false });
         }
       });
   };
@@ -73,6 +79,7 @@ export default class App extends Component {
             setSelected={this.setSelectedMovie}
             options={this.state.movies}
             isWookiee={this.state.isWookiee}
+            isLoading={this.state.isLoading}
           />
           <MovieInfo
             onClickTranslate={this.onClickTranslate}
@@ -81,6 +88,7 @@ export default class App extends Component {
               (movie) => movie.episodeId === this.state.selectedMovieId
             )}
             isWookiee={this.state.isWookiee}
+            isLoading={this.state.isLoading}
           />
         </div>
       </>

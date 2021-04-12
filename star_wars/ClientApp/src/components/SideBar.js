@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import "./SideBar.css";
 
-const SideBar = ({ options, setSelected, isWookiee }) => {
+const SideBar = ({ options, setSelected, isWookiee, isLoading }) => {
 
   const createOptionsFromProps = () => {
     return options.map((movie) => (
@@ -16,7 +16,8 @@ const SideBar = ({ options, setSelected, isWookiee }) => {
   return (
     <div className="sidebar">
       <h3>{isWookiee ? "Caorarc Ohrarcc Wwahanscc" : "Star Wars Films"}</h3>
-      {createOptionsFromProps()}
+      {isLoading ? <div class="lds-dual-ring"></div> : createOptionsFromProps()}
+      
     </div>
   );
 };

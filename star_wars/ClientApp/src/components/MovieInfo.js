@@ -2,7 +2,7 @@ import React from "react";
 
 import "./MovieInfo.css";
 
-const MovieInfo = ({ movie, isWookiee, onClickTranslate }) => {
+const MovieInfo = ({ movie, isWookiee, onClickTranslate, isLoading }) => {
   // converts int to roman numeral string
   // assumes int < 39 (XXXIX)
   const romanNumeralFromInt = (int) => {
@@ -27,9 +27,18 @@ const MovieInfo = ({ movie, isWookiee, onClickTranslate }) => {
     ));
   };
 
-  const buttonText = isWookiee
-    ? "aorcrawhcanraaowo akrarrwo aooo wowhrranahcac"
-    : "translate page to Wookiee";
+  const buttonComponent = (
+    <button
+      disabled={isLoading}
+      onClick={onClickTranslate}
+      style={{ float: "right" }}
+    >
+      {" "}
+      {isWookiee
+        ? "aorcrawhcanraaowo akrarrwo aooo wowhrranahcac"
+        : "translate page to Wookiee"}
+    </button>
+  );
 
   return (
     <div className="movie-info-container">
@@ -40,10 +49,7 @@ const MovieInfo = ({ movie, isWookiee, onClickTranslate }) => {
               {`${isWookiee ? "Cwoanwooaaowowa Wwahansc:" : "Selected Film:"} ${
                 movie.title
               }`}
-              <button onClick={onClickTranslate} style={{ float: "right" }}>
-                {" "}
-                {buttonText}
-              </button>
+              {buttonComponent}
             </p>
             <p style={{ marginBottom: "20px" }}>
               {`${isWookiee ? "Rcwoanworacwowa:" : "Released:"} ${
@@ -69,9 +75,7 @@ const MovieInfo = ({ movie, isWookiee, onClickTranslate }) => {
           {isWookiee
             ? "Cwoanwooaao ra wwahansc oowh aoacwo anwowwao aooo hoahwooh aoacwo oarcraohan ooakwowhahwhrr!"
             : "Select a film on the left to view the crawl opening!"}
-          <button onClick={onClickTranslate} style={{ float: "right" }}>
-            {buttonText}
-          </button>
+          {buttonComponent}
         </>
       )}
     </div>
