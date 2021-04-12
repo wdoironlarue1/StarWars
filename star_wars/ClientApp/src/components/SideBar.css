@@ -1,0 +1,17 @@
+.sidebar-option {
+  cursor: pointer;
+  padding: 5px 0px 5px 0px;
+}
+
+.sidebar-option:hover {
+    background-color: rgb(173, 160, 139);
+}
+
+.sidebar {
+  color: yellow;
+  border: white;
+  border-style: none solid none none;
+  height: 100vh;
+  width: 20vw;
+  padding: 0px 3px;
+}
