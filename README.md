@@ -6,7 +6,9 @@ To run:
 
 Need to have .net 5.0 installed (https://dotnet.microsoft.com/download)
 
-In terminal, navigate to /star_wars/ClientApp directory and execute `npm install` to install dependencies.
+Clone the repo `git clone https://github.com/wdoironlarue1/StarWars.git`.
+
+Navigate to /star_wars/ClientApp directory and execute `npm install` to install dependencies.
 
 Navigate to /star_wars directory and execute `dotnet run`.
 
